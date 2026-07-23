@@ -1,0 +1,168 @@
+/* Responsive Stylesheet for Food Delivery App */
+
+/* Large Tablets and Laptops */
+@media (max-width: 1199.98px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .carousel-offer-card .offer-title {
+        font-size: 1.7rem;
+    }
+    
+    .carousel-offer-card .offer-image-wrapper {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Medium Devices (Tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .navbar-premium {
+        padding: 10px 0;
+    }
+    
+    .nav-search-container {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+    
+    .hero-section {
+        padding: 120px 0 80px 0;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .search-bar-hero {
+        flex-direction: column;
+        border-radius: var(--radius-md);
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .search-bar-hero .location-picker {
+        border-right: none;
+        border-bottom: 1px solid var(--gray-light);
+        padding-left: 0;
+        padding-bottom: 10px;
+        width: 100%;
+    }
+    
+    .search-bar-hero .search-input-hero-wrapper {
+        padding-left: 0;
+        width: 100%;
+    }
+    
+    .search-bar-hero .btn-search {
+        width: 100%;
+        border-radius: 8px;
+    }
+    
+    .carousel-offer-card {
+        padding: 25px;
+    }
+    
+    .carousel-offer-card .offer-content {
+        max-width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .carousel-offer-card .offer-image-wrapper {
+        display: none; /* Hide images in offers on tablet/mobile slider for better text readability */
+    }
+    
+    .filter-sidebar {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .cart-offcanvas {
+        width: 100% !important; /* Full width cart on mobile */
+    }
+}
+
+/* Small Devices (Landscape Phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title-wrapper {
+        margin-bottom: 30px;
+    }
+    
+    .contact-info-card {
+        margin-bottom: 30px;
+    }
+    
+    .footer-premium {
+        padding: 60px 0 20px 0;
+    }
+    
+    .footer-title {
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Extra Small Devices (Portrait Phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .hero-section {
+        padding: 100px 0 60px 0;
+    }
+    
+    .category-card {
+        padding: 15px 10px;
+    }
+    
+    .category-icon-wrapper {
+        width: 55px;
+        height: 55px;
+        font-size: 1.5rem;
+    }
+    
+    .category-card span {
+        font-size: 0.85rem;
+    }
+    
+    .carousel-offer-card .offer-title {
+        font-size: 1.4rem;
+    }
+    
+    .carousel-offer-card .offer-badge {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Utility Animations Overrides for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+}

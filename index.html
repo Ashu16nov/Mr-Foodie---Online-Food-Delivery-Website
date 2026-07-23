@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Mr. Foodie - Premium, modern, and lightning fast food delivery. Discover restaurants and order delicious meals near you.">
+    <title>Mr. Foodie - Discover the Best Food Near You</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Sticky Premium Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-premium fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand navbar-brand-logo" href="#">
+                <span class="brand-logo-icon"><i class="fas fa-utensils text-danger"></i></span> Mr.<span>Foodie</span>
+            </a>
+
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Inline Live Search (Hidden on Hero, sticky on scroll) -->
+                <div class="mx-auto nav-search-container d-none d-lg-block">
+                    <div class="position-relative">
+                        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        <input id="nav-search" class="form-control nav-search-input w-100" type="search"
+                            placeholder="Search foods, cuisines, restaurants..." aria-label="Search">
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#restaurants">Restaurants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#menu">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#offers">Offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#contact">Contact</a>
+                    </li>
+
+                    <!-- Mobile Search Input inside Hamburger -->
+                    <li class="nav-item d-block d-lg-none mt-2">
+                        <input id="nav-search-mobile" class="form-control nav-search-input" type="search"
+                            placeholder="Search meals/cuisines..." aria-label="Search">
+                    </li>
+
+                    <!-- Dynamic Cart trigger button -->
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <button
+                            class="btn btn-outline-danger rounded-pill px-4 py-2 position-relative fw-600 d-flex align-items-center gap-2 w-100 justify-content-center"
+                            type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+                            aria-controls="cartOffcanvas">
+                            <i class="bi bi-cart3"></i> Cart
+                            <span id="cart-count-badge" class="cart-count-badge" style="display: none;">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Offcanvas (Slide out panel) -->
+    <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas"
+        aria-labelledby="cartOffcanvasLabel">
+        <div class="offcanvas-header cart-header-premium">
+            <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel"><i class="bi bi-bag text-danger me-2"></i>Your
+                Order Cart</h5>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-0">
+            <!-- Cart item list (Dynamic) -->
+            <div id="cart-items-list" class="flex-grow-1 p-3 overflow-y-auto">
+                <!-- Cart items will be loaded dynamically by cart.js -->
+            </div>
+
+            <!-- Cart totals and actions -->
+            <div class="cart-summary-premium">
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal" class="fw-semibold text-dark">Rs. 0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>GST & Restaurant Charges (5%)</span>
+                    <span id="cart-tax" class="fw-semibold text-dark">Rs. 0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Delivery Partner Fee</span>
+                    <span id="cart-delivery" class="fw-semibold text-dark">Rs. 0</span>
+                </div>
+                <div class="cart-summary-row cart-summary-total">
+                    <span class="text-dark">Grand Total</span>
+                    <span id="cart-total">Rs. 0</span>
+                </div>
+                <button id="cart-checkout-btn" class="btn btn-checkout mt-3" onclick="simulateCheckout()" disabled>
+                    Proceed to Checkout <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center animate-fade-in-up">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title mb-3">Discover the Best Food Near You</h1>
+                    <p class="hero-subtitle mb-5">Premium restaurants, organic fresh menus, and lightning-fast home
+                        delivery service.</p>
+
+                    <!-- Search & Location Picker Block -->
+                    <div class="search-bar-hero mb-4">
+                        <!-- Location select -->
+                        <div class="location-picker d-flex align-items-center">
+                            <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+                            <select class="location-select">
+                                <option value="ny">Patna, Bihar</option>
+                                <option value="ldn">Mohali, Punjab</option>
+                                <option value="del">Chandigarh, Punjab</option>
+                                <option value="del" selected>Kharar, Punjab</option>
+                                <option value="del">Ludhiana, Punjab</option>
+                                <option value="mum">Pune, Mumbai</option>
+                            </select>
+                        </div>
+
+                        <!-- Main search input -->
+                        <div class="search-input-hero-wrapper d-flex align-items-center">
+                            <i class="bi bi-search text-muted me-2"></i>
+                            <input id="hero-search" type="text" class="search-input-hero"
+                                placeholder="Search for dishes, cuisines, or restaurants...">
+                        </div>
+
+                        <!-- CTA buttons -->
+                        <button id="hero-search-btn" class="btn btn-search">Search</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                        <button class="btn btn-danger rounded-pill px-4 py-2.5 fw-bold" onclick="scrollToMenu()">Order
+                            Now</button>
+                        <a href="#restaurants"
+                            class="btn btn-outline-light rounded-pill px-4 py-2.5 fw-bold text-decoration-none">Explore
+                            Restaurants</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-5 bg-white">
+        <div class="container">
+            <div class="section-title-wrapper text-center">
+                <span class="section-tagline">Inspiration for your order</span>
+                <h2 class="section-title">What's on your mind?</h2>
+            </div>
+
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-10 g-3">
+                <div class="col">
+                    <div class="category-card active" data-category="All">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-utensils fs-4"></i></div>
+                        <span>All Foods</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Pizza">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-pizza-slice fs-4"></i></div>
+                        <span>Pizza</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Burger">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-burger fs-4"></i></div>
+                        <span>Burgers</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="North Indian">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-bowl-rice fs-4"></i></div>
+                        <span>North Indian</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="South Indian">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-layer-group fs-4"></i></div>
+                        <span>South Indian</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Chinese">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-bowl-food fs-4"></i></div>
+                        <span>Chinese</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Italian">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-wheat-awn fs-4"></i></div>
+                        <span>Italian</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Healthy Food">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-leaf fs-4"></i></div>
+                        <span>Healthy Food</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Desserts">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-birthday-cake fs-4"></i></div>
+                        <span>Desserts</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="category-card" data-category="Beverages">
+                        <div class="category-icon-wrapper text-danger"><i class="fas fa-glass-water fs-4"></i></div>
+                        <span>Beverages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Section (Carousel) -->
+    <section id="offers" class="offers-section">
+        <div class="container">
+            <div class="section-title-wrapper text-center mb-5">
+                <span class="section-tagline">Deals & Coupons</span>
+                <h2 class="section-title">Special Offers For You</h2>
+            </div>
+
+            <!-- Bootstrap Carousel for Offers -->
+            <div id="offersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#offersCarousel" data-bs-slide-to="4"
+                        aria-label="Slide 5"></button>
+                </div>
+                <div class="carousel-inner" id="offers-carousel-inner">
+                    <!-- Loaded dynamically via app.js -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#offersCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark p-2 rounded-circle" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#offersCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark p-2 rounded-circle" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurants Section -->
+    <section id="restaurants" class="py-5 bg-white">
+        <div class="container">
+            <div class="section-title-wrapper text-center mb-5">
+                <span class="section-tagline">Partner kitchens</span>
+                <h2 class="section-title">Popular Restaurants Nearby</h2>
+                <p class="section-subtitle">Ordered by customer ratings, local favorites, and fastest prep times</p>
+            </div>
+
+            <div class="row g-4" id="restaurants-grid">
+                <!-- Loaded dynamically by app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section (Includes Dynamic Filtering Sidebar/Grid) -->
+    <section id="menu" class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title-wrapper text-center mb-5">
+                <span class="section-tagline">Signature Cuisines</span>
+                <h2 class="section-title">Explore Our Delicious Menu</h2>
+                <p class="section-subtitle">Freshly prepared, locally sourced meals customized to your dietary needs</p>
+            </div>
+
+            <!-- Restaurant isolation banner alert -->
+            <div class="row mb-3" id="restaurant-filter-alert" style="display: none;">
+                <!-- Filled dynamically by filter.js -->
+            </div>
+
+            <div class="row">
+                <!-- Filter Sidebar -->
+                <div class="col-lg-3 col-md-12 mb-4">
+                    <div class="filter-sidebar">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold m-0"><i class="bi bi-funnel text-danger me-2"></i>Filters</h5>
+                            <button id="btn-reset-filters"
+                                class="btn btn-sm btn-link text-danger text-decoration-none p-0 fw-semibold">Clear
+                                All</button>
+                        </div>
+
+                        <!-- Veg / Non Veg -->
+                        <div class="filter-group mb-4">
+                            <h6 class="filter-group-title">Preference</h6>
+                            <div class="filter-pill-container">
+                                <span class="filter-pill filter-veg-pill active" data-value="All">All Items</span>
+                                <span class="filter-pill filter-veg-pill" data-value="Veg">Veg Only 🟢</span>
+                                <span class="filter-pill filter-veg-pill" data-value="Non-Veg">Non-Veg 🔴</span>
+                            </div>
+                        </div>
+
+                        <!-- Cuisines -->
+                        <div class="filter-group mb-4">
+                            <h6 class="filter-group-title">Cuisine</h6>
+                            <div class="filter-pill-container">
+                                <span class="filter-pill filter-cuisine-pill active" data-value="All">All
+                                    Cuisines</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="Italian">Italian</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="American">American</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="North Indian">North
+                                    Indian</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="South Indian">South
+                                    Indian</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="Chinese">Chinese</span>
+                                <span class="filter-pill filter-cuisine-pill" data-value="Middle Eastern">Middle
+                                    Eastern</span>
+                            </div>
+                        </div>
+
+                        <!-- Ratings selector -->
+                        <div class="filter-group mb-4">
+                            <h6 class="filter-group-title">Minimum Rating</h6>
+                            <select id="filter-rating" class="form-select form-control-premium shadow-none">
+                                <option value="All" selected>Show All Ratings</option>
+                                <option value="4.5">★ 4.5 and above</option>
+                                <option value="4.0">★ 4.0 and above</option>
+                            </select>
+                        </div>
+
+                        <!-- Sort criteria -->
+                        <div class="filter-group">
+                            <h6 class="filter-group-title">Sort By</h6>
+                            <select id="filter-sort" class="form-select form-control-premium shadow-none">
+                                <option value="popular" selected>Popularity (Default)</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Customer Rating</option>
+                                <option value="newest">New Releases</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food items Grid -->
+                <div class="col-lg-9 col-md-12">
+                    <div class="row g-4" id="menu-grid">
+                        <!-- Loaded dynamically by app.js -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Item Details Modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content modal-content-premium">
+                <div class="row g-0">
+                    <!-- Image Area -->
+                    <div class="col-md-5">
+                        <img id="modal-food-img" src="" class="modal-food-img" alt="Food Item">
+                    </div>
+                    <!-- Details Area -->
+                    <div class="col-md-7 d-flex flex-column">
+                        <div
+                            class="modal-header modal-header-premium d-flex align-items-center justify-content-between">
+                            <h4 id="modal-food-name" class="modal-title fw-bold text-dark m-0"></h4>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-body-premium flex-grow-1">
+                            <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+                                <span id="modal-food-type"
+                                    class="badge-category d-inline-flex align-items-center"></span>
+                                <span id="modal-food-rating"
+                                    class="badge bg-success-bg text-success px-3 py-1.5 rounded-pill fw-semibold"></span>
+                            </div>
+
+                            <p id="modal-food-desc" class="text-muted small mb-4"></p>
+
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-2">Ingredients:</h6>
+                                <div id="modal-food-ingredients" class="d-flex flex-wrap">
+                                    <!-- Badges injected dynamically -->
+                                </div>
+                            </div>
+
+                            <div class="row border-top border-bottom py-3 mb-4 g-2">
+                                <div class="col-6">
+                                    <span class="text-muted d-block small">Category</span>
+                                    <strong id="modal-food-category" class="text-dark"></strong>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-muted d-block small">Cuisine</span>
+                                    <strong id="modal-food-cuisine" class="text-dark"></strong>
+                                </div>
+                                <div class="col-6 mt-2">
+                                    <span class="text-muted d-block small">Preparation Time</span>
+                                    <strong id="modal-food-time" class="text-dark"></strong>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <div>
+                                    <span class="text-muted small d-block">Price</span>
+                                    <h3 id="modal-food-price" class="text-dark fw-bold m-0"></h3>
+                                </div>
+                                <button id="modal-add-to-cart-btn"
+                                    class="btn btn-danger rounded-pill px-4 py-2.5 fw-bold shadow-sm d-flex align-items-center gap-2">
+                                    <i class="bi bi-plus-lg"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact & Form Section -->
+    <section id="contact" class="contact-section bg-white">
+        <div class="container">
+            <div class="section-title-wrapper text-center mb-5">
+                <span class="section-tagline">Get in touch</span>
+                <h2 class="section-title">We'd Love to Hear From You</h2>
+                <p class="section-subtitle">Reach out for business collaborations, queries, or delivery assistance</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Info cards & Maps -->
+                <div class="col-lg-5">
+                    <div class="contact-info-card">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="bi bi-geo-alt"></i></div>
+                            <div class="contact-info-text">
+                                <h5>Our HQ Address</h5>
+                                <p>Anonymous Tower, Floor 14, Boring Road, Patna, Bihar - 800024</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="bi bi-telephone"></i></div>
+                            <div class="contact-info-text">
+                                <h5>Phone Support</h5>
+                                <p>+91 8102561056 (Toll Free: 1800-000-123)</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="bi bi-clock"></i></div>
+                            <div class="contact-info-text">
+                                <h5>Business Hours</h5>
+                                <p>Open 24/7 (Delivery available all days)</p>
+                            </div>
+                        </div>
+
+                        <!-- Map placeholder with premium design -->
+                        <div class="map-container position-relative">
+                            <!-- Premium styled placeholder map -->
+                            <div
+                                class="w-100 h-100 bg-secondary-subtle d-flex flex-column align-items-center justify-content-center text-center p-3">
+                                <i class="bi bi-map fs-1 text-danger mb-2"></i>
+                                <span class="fw-bold">Anonymous Tower HQ Location Map</span>
+                                <span class="small text-muted">Boring Road, Patna</span>
+                                <a href="https://maps.google.com" target="_blank"
+                                    class="btn btn-sm btn-outline-danger rounded-pill px-3 mt-3">Open in Maps</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="p-4 border rounded shadow-sm">
+                        <h4 class="fw-bold text-dark mb-4">Send Us a Message</h4>
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="validationName" class="form-label small fw-semibold">Full Name</label>
+                                    <input type="text" class="form-control form-control-premium" id="validationName"
+                                        required placeholder="e.g. Mr. Ashu">
+                                    <div class="invalid-feedback">Please enter your name.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="validationEmail" class="form-label small fw-semibold">Email
+                                        Address</label>
+                                    <input type="email" class="form-control form-control-premium" id="validationEmail"
+                                        required placeholder="e.g. mranonymous16nov@gmail.com">
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="validationPhone" class="form-label small fw-semibold">Phone
+                                        Number</label>
+                                    <input type="tel" class="form-control form-control-premium" id="validationPhone"
+                                        pattern="[0-9]{10}" placeholder="e.g. +91 8102561056" required>
+                                    <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="validationMessage" class="form-label small fw-semibold">Message</label>
+                                    <textarea class="form-control form-control-premium" id="validationMessage" rows="5"
+                                        placeholder="Let us know how we can help you..." required></textarea>
+                                    <div class="invalid-feedback">Please write a short message.</div>
+                                </div>
+                                <div class="col-12 mt-4 text-end">
+                                    <button class="btn btn-danger rounded-pill px-5 py-2.5 fw-bold" type="submit">Submit
+                                        Feedback</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Brand information -->
+                <div class="col-lg-4 col-md-12">
+                    <h3 class="footer-brand"><span class="brand-logo-icon"><i class="fas fa-utensils text-danger"></i></span> Mr.<span>Foodie</span></h3>
+                    <p class="mb-4">Mr. Foodie is your premium food discovery and express home delivery portal.
+                        We connect food lovers with the absolute finest local chefs and restaurants across India.</p>
+                    <div class="footer-social-icons">
+                        <a href="https://facebook.com" target="_blank" class="footer-social-icon"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="footer-social-icon"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="footer-social-icon"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="footer-social-icon"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick links -->
+                <div class="col-lg-2 col-md-4 col-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#restaurants">Restaurants</a></li>
+                        <li><a href="#menu">Our Menu</a></li>
+                        <li><a href="#offers">Deals & Offers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Support -->
+                <div class="col-lg-2 col-md-4 col-6">
+                    <h5 class="footer-title">Help Center</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4 col-md-4 col-12">
+                    <h5 class="footer-title">Newsletter</h5>
+                    <p class="mb-3">Subscribe to receive exclusive coupons, recipes, and seasonal dining offers.</p>
+                    <form class="newsletter-form d-flex"
+                        onsubmit="event.preventDefault(); alert('Subscribed to Newsletter!'); this.reset();">
+                        <input type="email" class="form-control shadow-none" placeholder="Email Address" required>
+                        <button class="btn btn-newsletter" type="submit"><i class="bi bi-send-fill"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="m-0">&copy; 2026 Mr. Foodie. All rights reserved. Made with <i class="bi bi-heart-fill text-danger mx-1"></i> in India using HTML, CSS, Bootstrap, and Vanilla JS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container-premium">
+        <!-- Injected dynamically by cart.js -->
+    </div>
+
+    <!-- Floating Scroll-to-Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn" title="Back to top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle (Includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Web App Modules -->
+    <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/search.js"></script>
+
+</body>
+
+</html>
