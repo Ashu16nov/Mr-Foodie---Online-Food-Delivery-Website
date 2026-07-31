@@ -72,7 +72,7 @@
     }
     
     .carousel-offer-card .offer-image-wrapper {
-        display: none; /* Hide images in offers on tablet/mobile slider for better text readability */
+        display: none;     /* Hide images in offers on tablet/mobile slider for better text readability */
     }
     
     .filter-sidebar {
@@ -82,7 +82,7 @@
     }
     
     .cart-offcanvas {
-        width: 100% !important; /* Full width cart on mobile */
+        width: 100% !important;     /* Full width cart on mobile */
     }
 }
 
