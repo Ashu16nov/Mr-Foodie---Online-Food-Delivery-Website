@@ -4,7 +4,7 @@
 
 **Mr. Foodie** is a modern, premium, and fully responsive food delivery web application inspired by leading food tech platforms like Zomato. Built using clean HTML5, CSS3, Bootstrap 5, and Vanilla JavaScript, it offers a seamless food ordering experience tailored for authentic Indian cuisine and state-wise regional specialties.
 
----
+------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🌟 Key Features
 
@@ -24,7 +24,7 @@
   - **Interactive Offcanvas Cart**: Dynamic subtotal, GST (5%), delivery fees (Free above Rs.299), quantity controls, and simulated checkout flow with toast notifications.
   - **Sticky Navbar & Smooth Scrolling**: Responsive layout optimized for Mobile, Tablet, and Desktop.
 
----
+--------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🛠️ Built With
 
@@ -34,7 +34,7 @@
 - **Vanilla JavaScript (ES6+)**: Modular application architecture without external frameworks
 - **Font Awesome & Bootstrap Icons**: Vector icons for crisp rendering
 
----
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 📁 Project Structure
 
@@ -52,7 +52,7 @@ FoodDelivery/
 └── README.md              # Project documentation
 ```
 
----
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🚀 Getting Started
 
